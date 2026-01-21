@@ -114,7 +114,8 @@ export default function ChatBot() {
     const [voiceEnabled, setVoiceEnabled] = useState(true);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
-    const recognitionRef = useRef<SpeechRecognition | null>(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const recognitionRef = useRef<any>(null);
     const { theme } = useTheme();
     const isDark = theme === "dark";
 
@@ -129,14 +130,16 @@ export default function ChatBot() {
     // Initialize speech recognition
     useEffect(() => {
         if (typeof window !== "undefined") {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
             if (SpeechRecognition) {
                 recognitionRef.current = new SpeechRecognition();
                 recognitionRef.current.continuous = false;
                 recognitionRef.current.interimResults = false;
                 recognitionRef.current.lang = "en-US";
 
-                recognitionRef.current.onresult = (event) => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                recognitionRef.current.onresult = (event: any) => {
                     const transcript = event.results[0][0].transcript;
                     setInputValue(transcript);
                     setIsListening(false);
@@ -277,8 +280,8 @@ export default function ChatBot() {
 
                 {/* Button */}
                 <div className={`relative w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 ${isOpen
-                        ? "bg-zinc-800"
-                        : "bg-gradient-to-br from-[#D4AF37] via-[#E5C158] to-[#00C4B4]"
+                    ? "bg-zinc-800"
+                    : "bg-gradient-to-br from-[#D4AF37] via-[#E5C158] to-[#00C4B4]"
                     }`}>
                     <AnimatePresence mode="wait">
                         {isOpen ? (
@@ -322,8 +325,8 @@ export default function ChatBot() {
                         exit={{ opacity: 0, y: 20, scale: 0.9 }}
                         transition={{ type: "spring", damping: 25, stiffness: 300 }}
                         className={`fixed bottom-28 right-6 z-50 w-[400px] max-w-[calc(100vw-3rem)] rounded-3xl shadow-2xl overflow-hidden ${isDark
-                                ? "bg-gradient-to-b from-[#1f1f1f] to-[#0f0f0f]"
-                                : "bg-gradient-to-b from-white to-gray-50"
+                            ? "bg-gradient-to-b from-[#1f1f1f] to-[#0f0f0f]"
+                            : "bg-gradient-to-b from-white to-gray-50"
                             }`}
                         style={{
                             boxShadow: isDark
@@ -333,8 +336,8 @@ export default function ChatBot() {
                     >
                         {/* Glassmorphism Header */}
                         <div className={`relative p-5 ${isDark
-                                ? "bg-gradient-to-r from-[#D4AF37]/10 via-transparent to-[#00C4B4]/10"
-                                : "bg-gradient-to-r from-[#D4AF37]/5 via-transparent to-[#00C4B4]/5"
+                            ? "bg-gradient-to-r from-[#D4AF37]/10 via-transparent to-[#00C4B4]/10"
+                            : "bg-gradient-to-r from-[#D4AF37]/5 via-transparent to-[#00C4B4]/5"
                             }`}>
                             <div className="absolute inset-0 backdrop-blur-xl" />
                             <div className="relative flex items-center justify-between">
@@ -363,8 +366,8 @@ export default function ChatBot() {
                                 <button
                                     onClick={() => setVoiceEnabled(!voiceEnabled)}
                                     className={`p-2 rounded-full transition-all ${voiceEnabled
-                                            ? "bg-[#D4AF37]/20 text-[#D4AF37]"
-                                            : isDark ? "bg-zinc-800 text-zinc-500" : "bg-gray-200 text-gray-400"
+                                        ? "bg-[#D4AF37]/20 text-[#D4AF37]"
+                                        : isDark ? "bg-zinc-800 text-zinc-500" : "bg-gray-200 text-gray-400"
                                         }`}
                                     title={voiceEnabled ? "Mute voice" : "Enable voice"}
                                 >
@@ -400,10 +403,10 @@ export default function ChatBot() {
                                         )}
                                         <div
                                             className={`rounded-2xl px-4 py-3 ${message.isBot
-                                                    ? isDark
-                                                        ? "bg-zinc-800/80 text-zinc-100 ml-4 rounded-tl-sm"
-                                                        : "bg-white text-gray-800 shadow-md ml-4 rounded-tl-sm border border-gray-100"
-                                                    : "bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-white rounded-tr-sm shadow-lg"
+                                                ? isDark
+                                                    ? "bg-zinc-800/80 text-zinc-100 ml-4 rounded-tl-sm"
+                                                    : "bg-white text-gray-800 shadow-md ml-4 rounded-tl-sm border border-gray-100"
+                                                : "bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-white rounded-tr-sm shadow-lg"
                                                 }`}
                                         >
                                             <p className="text-sm leading-relaxed">{message.text}</p>
@@ -473,8 +476,8 @@ export default function ChatBot() {
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
                                         className={`flex-shrink-0 text-xs px-4 py-2 rounded-full font-medium transition-all ${isDark
-                                                ? "bg-gradient-to-r from-zinc-800 to-zinc-700 text-zinc-300 hover:from-[#D4AF37]/20 hover:to-[#00C4B4]/20 hover:text-white border border-zinc-700"
-                                                : "bg-white text-gray-600 hover:bg-gradient-to-r hover:from-[#D4AF37]/10 hover:to-[#00C4B4]/10 shadow-sm border border-gray-200"
+                                            ? "bg-gradient-to-r from-zinc-800 to-zinc-700 text-zinc-300 hover:from-[#D4AF37]/20 hover:to-[#00C4B4]/20 hover:text-white border border-zinc-700"
+                                            : "bg-white text-gray-600 hover:bg-gradient-to-r hover:from-[#D4AF37]/10 hover:to-[#00C4B4]/10 shadow-sm border border-gray-200"
                                             }`}
                                     >
                                         {q}
@@ -485,22 +488,22 @@ export default function ChatBot() {
 
                         {/* Enhanced Input Area */}
                         <form onSubmit={handleSubmit} className={`p-4 ${isDark
-                                ? "bg-gradient-to-t from-[#1f1f1f] to-transparent border-t border-zinc-800/50"
-                                : "bg-gradient-to-t from-white to-transparent border-t border-gray-200/50"
+                            ? "bg-gradient-to-t from-[#1f1f1f] to-transparent border-t border-zinc-800/50"
+                            : "bg-gradient-to-t from-white to-transparent border-t border-gray-200/50"
                             }`}>
                             <div className={`flex gap-2 items-center rounded-2xl px-4 py-3 transition-all ${isDark
-                                    ? "bg-zinc-800/50 border border-zinc-700 focus-within:border-[#D4AF37]/50"
-                                    : "bg-gray-100 border border-gray-200 focus-within:border-[#D4AF37]/50"
+                                ? "bg-zinc-800/50 border border-zinc-700 focus-within:border-[#D4AF37]/50"
+                                : "bg-gray-100 border border-gray-200 focus-within:border-[#D4AF37]/50"
                                 }`}>
                                 {/* Microphone Button */}
                                 <button
                                     type="button"
                                     onClick={isListening ? stopListening : startListening}
                                     className={`p-2 rounded-full transition-all ${isListening
-                                            ? "bg-red-500 text-white animate-pulse"
-                                            : isDark
-                                                ? "bg-zinc-700 text-zinc-400 hover:text-[#D4AF37] hover:bg-zinc-600"
-                                                : "bg-gray-200 text-gray-500 hover:text-[#D4AF37] hover:bg-gray-300"
+                                        ? "bg-red-500 text-white animate-pulse"
+                                        : isDark
+                                            ? "bg-zinc-700 text-zinc-400 hover:text-[#D4AF37] hover:bg-zinc-600"
+                                            : "bg-gray-200 text-gray-500 hover:text-[#D4AF37] hover:bg-gray-300"
                                         }`}
                                     title={isListening ? "Stop listening" : "Voice input"}
                                 >
@@ -524,8 +527,8 @@ export default function ChatBot() {
                                     type="submit"
                                     disabled={!inputValue.trim()}
                                     className={`p-2.5 rounded-xl transition-all ${inputValue.trim()
-                                            ? "bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-white shadow-lg hover:shadow-xl"
-                                            : isDark ? "bg-zinc-700 text-zinc-500" : "bg-gray-200 text-gray-400"
+                                        ? "bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-white shadow-lg hover:shadow-xl"
+                                        : isDark ? "bg-zinc-700 text-zinc-500" : "bg-gray-200 text-gray-400"
                                         }`}
                                 >
                                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
