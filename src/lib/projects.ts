@@ -14,6 +14,17 @@ export interface Project {
 
 export const projects: Project[] = [
     {
+        id: "velden-os",
+        title: "Velden OS – Enterprise Healthcare RCM",
+        description: "Full-stack HIPAA-compliant Revenue Cycle Management operating system. Features multi-tenant SaaS architecture, X12 835 ERA parsing, AI-powered denial management, and a unique desktop-like UI with glassmorphism design.",
+        sector: "Healthcare / Enterprise SaaS",
+        techStack: ["Python", "FastAPI", "PostgreSQL", "Redis", "Docker", "Terraform", "GCP"],
+        impact: "25+ RESTful APIs • Multi-tenant RLS • HIPAA-compliant • Desktop-like UI",
+        githubUrl: "https://github.com/sathishlella/VeldenOS",
+        featured: true,
+        roles: ["engineer", "specialist"],
+    },
+    {
         id: "velden-health",
         title: "Velden Health RCM Platform",
         description: "Full-stack healthcare Revenue Cycle Management platform with AI-powered claim recovery, predictive analytics dashboard, and automated denial management. Features interactive calculators and real-time A/R tracking.",
