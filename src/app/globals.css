@@ -1,26 +1,619 @@
 @import "tailwindcss";
 
+/* 
+  Desert-Tech Luxury Design System
+  Theme: Dubai 2031 AI Vision
+  Palette: Deep Charcoal + Desert Gold + Neon Teal
+*/
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary Colors */
+  --color-charcoal: #0F0F0F;
+  --color-charcoal-light: #1A1A1A;
+  --color-charcoal-dark: #050505;
+
+  /* Accent Colors */
+  --color-gold: #D4AF37;
+  --color-gold-light: #E5C158;
+  --color-gold-dark: #B8962E;
+  --color-teal: #00C4B4;
+
+  /* Neutral Colors */
+  --color-zinc-50: #fafafa;
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-200: #e4e4e7;
+  --color-zinc-300: #d4d4d8;
+  --color-zinc-400: #a1a1aa;
+  --color-zinc-500: #71717a;
+  --color-zinc-600: #52525b;
+  --color-zinc-700: #3f3f46;
+  --color-zinc-800: #27272a;
+  --color-zinc-900: #18181b;
+
+  /* Typography */
+  --font-heading: 'Outfit', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-glow-gold: 0 0 30px rgba(212, 175, 55, 0.3);
+  --shadow-glow-teal: 0 0 30px rgba(0, 196, 180, 0.3);
+
+  /* Theme Variables - Dark (Default) */
+  --bg-primary: #0F0F0F;
+  --bg-secondary: #1A1A1A;
+  --bg-card: rgba(39, 39, 42, 0.5);
+  --bg-card-hover: rgba(39, 39, 42, 0.8);
+  --text-primary: #f4f4f5;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --border-color: #27272a;
+  --border-color-hover: rgba(212, 175, 55, 0.5);
+}
+
+/* Light Theme - Apple Style Pure White */
+[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #fafafa;
+  --bg-card: rgba(0, 0, 0, 0.03);
+  --bg-card-hover: rgba(0, 0, 0, 0.06);
+  --text-primary: #1d1d1f;
+  --text-secondary: #515154;
+  --text-muted: #86868b;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --border-color-hover: rgba(212, 175, 55, 0.6);
+  --color-gold: #B8962E;
+  --color-gold-light: #D4AF37;
+  --shadow-glow-gold: 0 0 40px rgba(212, 175, 55, 0.15);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--color-charcoal);
+  --color-foreground: var(--color-zinc-100);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Smooth Theme Transitions */
+body,
+.hero-container,
+.bento-card,
+.glass,
+.glass-gold,
+.btn-primary,
+.btn-secondary,
+.role-badge,
+.skill-badge,
+section,
+main,
+footer,
+nav {
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Light Theme Overrides */
+[data-theme="light"] body {
+  background: #ffffff !important;
+  color: #1d1d1f !important;
+}
+
+[data-theme="light"] main {
+  background: #ffffff !important;
+}
+
+[data-theme="light"] section {
+  background: #ffffff !important;
+}
+
+[data-theme="light"] footer {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Target elements with inline bg colors */
+[data-theme="light"] [class*="bg-[#0"] {
+  background: #ffffff !important;
+}
+
+[data-theme="light"] [class*="bg-zinc-9"] {
+  background: rgba(0, 0, 0, 0.03) !important;
+}
+
+/* Text colors */
+[data-theme="light"] [class*="text-zinc-1"],
+[data-theme="light"] .text-zinc-100,
+[data-theme="light"] .text-zinc-200 {
+  color: #1d1d1f !important;
+}
+
+[data-theme="light"] [class*="text-zinc-3"],
+[data-theme="light"] [class*="text-zinc-4"],
+[data-theme="light"] .text-zinc-300,
+[data-theme="light"] .text-zinc-400 {
+  color: #515154 !important;
+}
+
+[data-theme="light"] [class*="text-zinc-5"],
+[data-theme="light"] [class*="text-zinc-6"],
+[data-theme="light"] .text-zinc-500,
+[data-theme="light"] .text-zinc-600 {
+  color: #86868b !important;
+}
+
+/* Border colors */
+[data-theme="light"] [class*="border-zinc-8"],
+[data-theme="light"] .border-zinc-800 {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Hero gradient */
+[data-theme="light"] .hero-container,
+[data-theme="light"] [class*="hero"] {
+  background: linear-gradient(180deg, #ffffff 0%, #f5f5f7 100%) !important;
+}
+
+/* Glass effects */
+[data-theme="light"] .glass {
+  background: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="light"] .glass-gold {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(212, 175, 55, 0.2) !important;
+}
+
+[data-theme="light"] .bento-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+[data-theme="light"] .bento-card:hover {
+  background: var(--bg-card-hover) !important;
+  border-color: var(--border-color-hover) !important;
+}
+
+[data-theme="light"] .skill-badge {
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: var(--text-secondary) !important;
+}
+
+[data-theme="light"] .role-badge {
+  background: rgba(0, 0, 0, 0.03) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: var(--text-secondary) !important;
+}
+
+[data-theme="light"] .btn-secondary {
+  background: transparent !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .btn-secondary:hover {
+  border-color: var(--color-gold) !important;
+  color: var(--color-gold) !important;
+}
+
+[data-theme="light"] .section {
+  background: var(--bg-primary) !important;
+}
+
+[data-theme="light"] .section:nth-child(even) {
+  background: var(--bg-secondary) !important;
+}
+
+[data-theme="light"] footer {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Selection Color */
+::selection {
+  background: var(--color-gold);
+  color: var(--color-charcoal);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-charcoal);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-zinc-700);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold);
+}
+
+/* Typography Classes */
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold), var(--color-gold-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-teal {
+  background: linear-gradient(135deg, #00E5D4, var(--color-teal), #009688);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass Effect */
+.glass {
+  background: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.glass-gold {
+  background: rgba(212, 175, 55, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* Glow Effects */
+.glow-gold {
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.glow-teal {
+  box-shadow: var(--shadow-glow-teal);
+}
+
+/* Button Styles */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark));
+  color: var(--color-charcoal);
+  font-weight: 600;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-gold);
+  font-weight: 600;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-gold);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(212, 175, 55, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Hero Section Styles */
+.hero-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  text-align: center;
+  pointer-events: none;
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: var(--space-md);
+}
+
+.hero-subtitle {
+  font-size: clamp(0.875rem, 2vw, 1.25rem);
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-zinc-400);
+}
+
+/* Role Badge */
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--space-md);
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+/* Coordinates Display */
+.coordinates {
+  position: absolute;
+  bottom: var(--space-xl);
+  left: var(--space-xl);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: rgba(212, 175, 55, 0.5);
+  letter-spacing: 0.05em;
+}
+
+/* Role Navigation */
+.role-nav {
+  position: fixed;
+  top: 50%;
+  right: var(--space-xl);
+  transform: translateY(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.role-nav-item {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--color-zinc-600);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.role-nav-item:hover,
+.role-nav-item.active {
+  border-color: var(--color-gold);
+  background: var(--color-gold);
+}
+
+/* Bento Grid */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  padding: var(--space-2xl);
+}
+
+.bento-card {
+  background: var(--color-charcoal-light);
+  border: 1px solid var(--color-zinc-800);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  transition: all 0.3s ease;
+}
+
+.bento-card:hover {
+  border-color: var(--color-gold);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.bento-card-large {
+  grid-column: span 2;
+}
+
+/* Skill Badge */
+.skill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--color-zinc-800);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-zinc-300);
+  transition: all 0.2s ease;
+}
+
+.skill-badge:hover {
+  background: var(--color-gold);
+  color: var(--color-charcoal);
+}
+
+/* Section Styles */
+.section {
+  padding: var(--space-3xl) var(--space-2xl);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  margin-bottom: var(--space-lg);
+}
+
+.section-subtitle {
+  font-size: 1.125rem;
+  color: var(--color-zinc-400);
+  max-width: 600px;
+}
+
+/* Animations */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+    padding: var(--space-lg);
+  }
+
+  .bento-card-large {
+    grid-column: span 1;
+  }
+
+  .role-nav {
+    display: none;
+  }
+
+  .coordinates {
+    display: none;
+  }
+}
+
+/* Print Styles for Resume PDF Export */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-break {
+    page-break-before: always;
+  }
+
+  main {
+    padding: 20px !important;
+    background: white !important;
+  }
+
+  .text-gradient-gold {
+    background: none !important;
+    -webkit-text-fill-color: #B8962E !important;
+    color: #B8962E !important;
+  }
+
+  /* Dark backgrounds become light for print */
+  [class*="bg-zinc-900"],
+  [class*="bg-[#0F0F0F]"],
+  [class*="bg-[#0A0A0A]"] {
+    background: #f5f5f5 !important;
+  }
+
+  /* Text colors for readability */
+  [class*="text-zinc-100"],
+  [class*="text-zinc-200"],
+  [class*="text-zinc-300"] {
+    color: #1a1a1a !important;
+  }
+
+  [class*="text-zinc-400"],
+  [class*="text-zinc-500"] {
+    color: #4a4a4a !important;
+  }
+
+  [class*="border-zinc-800"] {
+    border-color: #ddd !important;
+  }
+
+  /* Accent colors for print */
+  [class*="text-[#D4AF37]"] {
+    color: #B8962E !important;
+  }
+
+  [class*="text-[#00C4B4]"] {
+    color: #008B7D !important;
+  }
 }
