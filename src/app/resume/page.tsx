@@ -129,13 +129,13 @@ export default function ResumePage() {
             const opt = {
                 margin: [10, 10, 10, 10] as [number, number, number, number],
                 filename: 'Sathish_Lella_Resume.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
+                image: { type: 'jpeg' as const, quality: 0.98 },
                 html2canvas: {
                     scale: 2,
                     useCORS: true,
                     backgroundColor: '#ffffff'
                 },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                jsPDF: { unit: 'mm' as const, format: 'a4' as const, orientation: 'portrait' as const }
             };
 
             await html2pdf().set(opt).from(element).save();
@@ -167,8 +167,8 @@ export default function ResumePage() {
                         onClick={handleDownloadPDF}
                         disabled={isGenerating}
                         className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-colors ${isGenerating
-                                ? 'bg-zinc-600 text-zinc-300 cursor-wait'
-                                : 'bg-[#D4AF37] text-[#0F0F0F] hover:bg-[#E5C158]'
+                            ? 'bg-zinc-600 text-zinc-300 cursor-wait'
+                            : 'bg-[#D4AF37] text-[#0F0F0F] hover:bg-[#E5C158]'
                             }`}
                     >
                         {isGenerating ? (
